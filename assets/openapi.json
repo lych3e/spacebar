@@ -4082,7 +4082,6 @@
                 "type": "object",
                 "properties": {
                     "name": {
-                        "maxLength": 100,
                         "type": "string"
                     },
                     "type": {
@@ -4648,7 +4647,7 @@
                     "name": {
                         "type": "string"
                     },
-                    "avatar": {
+                    "icon": {
                         "type": "string",
                         "nullable": true
                     }
@@ -5697,6 +5696,9 @@
                             4
                         ],
                         "type": "number"
+                    },
+                    "confirm_stranger_request": {
+                        "type": "boolean"
                     }
                 }
             },
@@ -6831,7 +6833,6 @@
                 "type": "object",
                 "properties": {
                     "name": {
-                        "maxLength": 100,
                         "type": "string"
                     },
                     "type": {
@@ -13373,9 +13374,14 @@
                     "maxWebhooks": {
                         "type": "integer",
                         "default": 100
+                    },
+                    "maxName": {
+                        "type": "integer",
+                        "default": 32
                     }
                 },
                 "required": [
+                    "maxName",
                     "maxPins",
                     "maxTopic",
                     "maxWebhooks"

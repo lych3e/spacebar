@@ -133,7 +133,7 @@ in
             && cfg.gatewayOffload.extraConfiguration.ConnectionStrings ? Spacebar
             && cfg.gatewayOffload.extraConfiguration.ConnectionStrings.Spacebar != null;
           message = ''
-            Setting a database connection string in extraConfiguration (`extraConfiguration.ConnectionStrings.Spacebar`) is required when using C# services.
+            Gateway Offload: Setting a database connection string in extraConfiguration (`extraConfiguration.ConnectionStrings.Spacebar`) is required when using C# services.
             Example: Host=127.0.0.1; Username=Spacebar; Password=SuperSecurePassword12; Database=spacebar; Port=5432; Include Error Detail=true; Maximum Pool Size=1000; Command Timeout=6000; Timeout=600;
           '';
         }
@@ -160,8 +160,9 @@ in
             # things we force...
             # CONFIG_PATH = configFile;
             CONFIG_READONLY = 1;
-            ASPNETCORE_URLS = "http://127.0.0.1:${toString cfg.gatewayOffload.listenPort}";
+            ASPNETCORE_URLS = "http://0.0.0.0:${toString cfg.gatewayOffload.listenPort}";
             STORAGE_LOCATION = cfg.cdnPath;
+            APPSETTINGS_PATH = jsonFormat.generate "appsettings.spacebar-gateway-offload.json" (lib.recursiveUpdate (import ./default-appsettings-json.nix) cfg.gatewayOffload.extraConfiguration);
           }
         );
         serviceConfig = {
